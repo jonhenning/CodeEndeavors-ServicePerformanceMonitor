@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Code Endeavors Service Performance Monitor</title>
+    <link href='css/bootstrap-min-css' rel='stylesheet' type='text/css' />
+    <script src='jquery-1-10-2-min-js' type='text/javascript'></script>
+    <script src='jsrender-js' type='text/javascript'></script>
+    <script src='js/bootstrap-min-js' type='text/javascript'></script>
+
+    <link href='ui-css' rel='stylesheet' type='text/css' />
+    <script src='monitor-statistics' type='text/javascript'></script>
+</head>
+<body>
+</body>
+
+<script id="template" type="text/html">
+    <div class="container-fluid">
+        <div style="width: 100%; text-align: center">
+            <div><h1>Code Endeavors Service Performance Monitor</h1></div>
+            <div class="badge">{{:Version}}</div>
+            <div>Application Start: {{:ApplicationStart}}</div>
+            <div>Monitor Start: {{:MonitorStart}}</div>
+
+            <a class="btn btn-default" onclick="toggleEnabled()">{{:Enabled ? 'Disable' : 'Enable'}}</a>
+            <a class="btn btn-default" onclick="refresh()">Refresh</a>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Endpoint Hit Count</div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            {{for EndpointStats}}
+                            <li class="list-group-item">
+                                <span class="badge">{{:Count}}</span>
+                                {{:Name}}
+                            </li>
+                            {{/for}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Slowest Endpoints</div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            {{for SlowestStats}}
+                            <li class="list-group-item">
+                                <span class="badge">{{:Duration}} ms</span>
+                                {{:Name}}
+                            </li>
+                            {{/for}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</script>
+<script>
+
+    $('body').html($('#template').render(performance));
+
+    //alert(performance.ApplicationStart);
+    //alert(performance.EndpointStats.length);
+    //for (var i = 0; i < performance.EndpointStats.length; i++)
+    //    alert(performance.EndpointStats[i].Name + ' ' + performance.EndpointStats[i].Count);
+
+    function toggleEnabled()
+    {
+        var url = performance.Enabled ? 'disable' : 'enable';
+        $.ajax({ url: url, method: 'post' }).done(function(data) { refresh(); });
+    }
+
+    function refresh()
+    {
+        window.location.href = window.location.href;
+    }
+
+</script>
+
+
+
+</html>
