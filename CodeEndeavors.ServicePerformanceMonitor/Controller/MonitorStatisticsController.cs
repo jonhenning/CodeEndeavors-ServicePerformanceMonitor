@@ -29,6 +29,11 @@ namespace CodeEndeavors.ServicePerformanceMonitor.Controller
             Services.RequestPerformance.Enabled = false;
             return new HttpResponseMessage();
         }
+        public HttpResponseMessage Reset()
+        {
+            Services.RequestPerformance.Reset();
+            return new HttpResponseMessage();
+        }
 
     }
 }

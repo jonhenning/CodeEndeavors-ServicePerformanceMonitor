@@ -23,6 +23,7 @@
 
             <a class="btn btn-default" onclick="toggleEnabled()">{{:Enabled ? 'Disable' : 'Enable'}}</a>
             <a class="btn btn-default" onclick="refresh()">Refresh</a>
+            <a class="btn btn-default" onclick="reset()">Reset</a>
         </div>
         <br/>
         <div class="row">
@@ -73,6 +74,11 @@
     {
         var url = performance.Enabled ? 'disable' : 'enable';
         $.ajax({ url: url, method: 'post' }).done(function(data) { refresh(); });
+    }
+
+    function reset()
+    {
+        $.ajax({ url: 'reset', method: 'post' }).done(function(data) { refresh(); });
     }
 
     function refresh()

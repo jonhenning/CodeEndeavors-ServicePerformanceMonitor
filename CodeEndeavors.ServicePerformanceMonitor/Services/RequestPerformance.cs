@@ -13,6 +13,7 @@ namespace CodeEndeavors.ServicePerformanceMonitor.Services
     public class RequestPerformance
     {
         private static Models.Performance _perf = null;
+        private static Configs.PerformanceMonitorConfig _config = null;
         public static bool Enabled
         {
             get
@@ -28,6 +29,13 @@ namespace CodeEndeavors.ServicePerformanceMonitor.Services
         public static void Configure(Configs.PerformanceMonitorConfig config)
         {
             _perf = new Models.Performance(config);
+            _config = config;
+        }
+
+        public static void Reset()
+        {
+            _perf = new Models.Performance(_config);
+            _perf.Enabled = true;
         }
 
         public static Models.Performance Performance

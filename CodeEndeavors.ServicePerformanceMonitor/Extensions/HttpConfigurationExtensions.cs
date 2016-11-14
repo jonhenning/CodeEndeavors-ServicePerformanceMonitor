@@ -74,6 +74,11 @@ namespace CodeEndeavors.ServicePerformanceMonitor.Extensions
                 name: "codeendeavors_perfmon_disable",
                 routeTemplate: routeTemplate + "/disable",
                 defaults: new { controller = "MonitorStatistics", action = "Disable" });
+            
+            _httpConfig.Routes.MapHttpRoute(
+                name: "codeendeavors_perfmon_reset",
+                routeTemplate: routeTemplate + "/reset",
+                defaults: new { controller = "MonitorStatistics", action = "Reset" });
 
             _httpConfig.Routes.MapHttpRoute(
                 name: "codeendeavors_perfmon_ui" + routeTemplate,
