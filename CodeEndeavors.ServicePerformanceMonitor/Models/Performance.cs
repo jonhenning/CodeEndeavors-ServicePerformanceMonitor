@@ -45,7 +45,6 @@ namespace CodeEndeavors.ServicePerformanceMonitor.Models
         {
             _config = config;
             Enabled = config.Enabled;
-            ApplicationStart = DateTimeOffset.Now.ToString();
 
             if (Enabled)
                 MonitorStart = DateTimeOffset.Now.ToString();

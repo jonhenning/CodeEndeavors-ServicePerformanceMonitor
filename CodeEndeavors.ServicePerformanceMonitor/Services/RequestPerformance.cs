@@ -14,6 +14,7 @@ namespace CodeEndeavors.ServicePerformanceMonitor.Services
     {
         private static Models.Performance _perf = null;
         private static Configs.PerformanceMonitorConfig _config = null;
+        private static DateTimeOffset _applicationStart = DateTime.UtcNow;
         public static bool Enabled
         {
             get
@@ -29,12 +30,14 @@ namespace CodeEndeavors.ServicePerformanceMonitor.Services
         public static void Configure(Configs.PerformanceMonitorConfig config)
         {
             _perf = new Models.Performance(config);
+            _perf.ApplicationStart = _applicationStart.ToString();
             _config = config;
         }
 
         public static void Reset()
         {
             _perf = new Models.Performance(_config);
+            _perf.ApplicationStart = _applicationStart.ToString();
             _perf.Enabled = true;
         }
 
